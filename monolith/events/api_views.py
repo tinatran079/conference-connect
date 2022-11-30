@@ -9,7 +9,10 @@ from .models import Conference, Location, State
 
 class LocationListEncoder(ModelEncoder):
     model = Location
-    properties = ["name"]
+    properties = [
+        "name",
+        "picture_url",
+    ]
 
 
 class LocationDetailEncoder(ModelEncoder):
@@ -228,3 +231,22 @@ def api_show_location(request, pk):
             encoder=LocationDetailEncoder,
             safe=False,
         )
+
+
+@require_http_methods(["GET"])
+def api_list_states(request):
+    # get states from database ordered by name
+    states = State.objects.all().order_by('name')
+    # create empty list, state_list
+    state_list = []
+    #for each state in states from db
+    for state in states:
+        # create dict that contains name and abrev
+        state_dict = {
+            "name": state.name,
+            "abbreviation": state.abbreviation,
+        }
+
+        #append the dict to list
+        state_list.append(state_dict)
+    return JsonResponse({"states": state_list})

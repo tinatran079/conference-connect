@@ -5,11 +5,12 @@ services:
       context: ./monolith
       dockerfile: ./Dockerfile.dev
     environment:
-      DATABASE_URL: "postgres://monolith:password@database:5432/monolith"
+      DATABASE_URL: "postgres://postgres:test-databases@database:5432/monolith"
       WAIT_HOSTS: database:5432, rabbitmq:5672
       WAIT_TIMEOUT: 180
       PEXELS_API_KEY: ${PEXELS_API_KEY}
       OPEN_WEATHER_API_KEY: ${OPEN_WEATHER_API_KEY}
+      DJWTO_SIGNING_KEY: ${DJWTO_SIGNING_KEY}
     ports:
       - "8000:8000"
     volumes:
@@ -29,7 +30,7 @@ services:
       - rabbitmq
       - database
     environment:
-      DATABASE_URL: "postgres://attendees:password@database:5432/attendees"
+      DATABASE_URL: "postgres://postgres:test-databases@database:5432/attendees"
       WAIT_HOSTS: database:5432, rabbitmq:5672
       WAIT_TIMEOUT: 180
   attendees_conference_info:
@@ -41,7 +42,7 @@ services:
     depends_on:
       - monolith
     environment:
-      DATABASE_URL: "postgres://attendees:password@database:5432/attendees"
+      DATABASE_URL: "postgres://postgres:test-databases@database:5432/attendees"
   attendees_account_info:
     build:
       context: ./attendees_microservice
@@ -52,7 +53,7 @@ services:
       - rabbitmq
       - database
     environment:
-      DATABASE_URL: "postgres://attendees:password@database:5432/attendees"
+      DATABASE_URL: "postgres://postgres:test-databases@database:5432/attendees"
       WAIT_HOSTS: database:5432, rabbitmq:5672
       WAIT_TIMEOUT: 180
   presentation_workflow:
@@ -92,3 +93,14 @@ services:
       - POSTGRES_PASSWORD=test-databases
     ports:
       - 15432:5432
+  react:
+    image: node:latest
+    command: npm start
+    working_dir: /app
+    volumes:
+      - ./ghi/app:/app
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3001
+    ports:
+      - "3001:3001"
