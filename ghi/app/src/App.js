@@ -8,22 +8,27 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 function App(props) {
-  if (props.attendees === undefined) {
-    return null;
-  }
   return (
     <BrowserRouter>
       <Nav />
-      <div className="container">
-        <Routes>
-            <Route path="conferences/new" element={<ConferenceForm />} />
-            <Route path="attendees/new" element={<AttendConferenceForm />} />
-            <Route path="locations/new" element={<LocationForm />} />
-            <Route path="attendees" element={<AttendeesList attendees={props.attendees} />} />
-        </Routes>
-      </div >
+      <Routes>
+        <Route path="locations">
+          {/* <Route path="" element={<LocationList />} /> */}
+          <Route path="new" element={<LocationForm />} />
+        </Route>
+        <Route path="conferences">
+          {/* <Route path="" element={<ConferenceList />} /> */}
+          <Route path="new" element={<ConferenceForm />} />
+        </Route>
+        <Route path="attendees">
+          <Route index element={<AttendeesList />} />
+          <Route path="new" element={<AttendConferenceForm />} />
+        </Route>
+        {/* <Route path="presentations">
+          <Route path="new" element={<PresentationForm />} />
+        </Route> */}
+      </Routes>
     </BrowserRouter>
-
   );
 }
 
