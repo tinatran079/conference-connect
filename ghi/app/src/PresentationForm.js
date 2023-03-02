@@ -37,7 +37,7 @@ class PresentationForm extends React.Component {
         data.company_name = data.companyName;
         delete data.presenterName;
         delete data.presenterEmail;
-        delete data.compantName;
+        delete data.companyName;
         delete data.conferences;
 
         const conferenceUrl = `http://localhost:8000${this.state.conference}presentations/`;

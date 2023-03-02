@@ -9,10 +9,7 @@ from .models import Conference, Location, State
 
 class LocationListEncoder(ModelEncoder):
     model = Location
-    properties = [
-        "name",
-        "picture_url",
-    ]
+    properties = ["name", "picture_url", "id"]
 
 
 class LocationDetailEncoder(ModelEncoder):
@@ -32,7 +29,7 @@ class LocationDetailEncoder(ModelEncoder):
 
 class ConferenceListEncoder(ModelEncoder):
     model = Conference
-    properties = ["name"]
+    properties = ["name", "id"]
 
 
 class ConferenceDetailEncoder(ModelEncoder):
@@ -99,7 +96,7 @@ def api_list_conferences(request):
             safe=False,
         )
 
-
+@require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_conference(request, pk):
     """
     Returns the details for the Conference model specified
@@ -125,16 +122,27 @@ def api_show_conference(request, pk):
         }
     }
     """
-    conference = Conference.objects.get(id=pk)
-    weather = get_weather_data(
-        conference.location.city,
-        conference.location.state.abbreviation,
-    )
-    return JsonResponse(
-        {"conference": conference, "weather": weather},
-        encoder=ConferenceDetailEncoder,
-        safe=False,
-    )
+    if request.method == "GET":
+        conference = Conference.objects.get(id=pk)
+        weather = get_weather_data(
+            conference.location.city,
+            conference.location.state.abbreviation,
+        )
+        return JsonResponse(
+            {"conference": conference, "weather": weather},
+            encoder=ConferenceDetailEncoder,
+        )
+    elif request.method == "DELETE":
+        try:
+            conference = Conference.objects.get(id=pk)
+            conference.delete()
+            return JsonResponse(
+                conference,
+                encoder=ConferenceDetailEncoder,
+                safe=False,
+            )
+        except Conference.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"})
 
 
 @require_http_methods(["GET", "POST"])
@@ -235,18 +243,12 @@ def api_show_location(request, pk):
 
 @require_http_methods(["GET"])
 def api_list_states(request):
-    # get states from database ordered by name
-    states = State.objects.all().order_by('name')
-    # create empty list, state_list
+    states = State.objects.order_by("name")
     state_list = []
-    #for each state in states from db
     for state in states:
-        # create dict that contains name and abrev
-        state_dict = {
+        values = {
             "name": state.name,
             "abbreviation": state.abbreviation,
         }
-
-        #append the dict to list
-        state_list.append(state_dict)
+        state_list.append(values)
     return JsonResponse({"states": state_list})

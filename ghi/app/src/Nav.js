@@ -17,7 +17,7 @@ function Nav(){
                 <NavLink className="nav-link" aria-current="page" to="/locations/new">New location</NavLink>
             </li>
             <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/conference/new">New conference</NavLink>
+                <NavLink className="nav-link" aria-current="page" to="/conferences/new">New conference</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" to="/presentations/new">New presentation</NavLink>

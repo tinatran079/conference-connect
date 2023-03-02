@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function ConferenceColumn(props) {
+  const [selectedConference, setSelectedConference] = useState(undefined);
+
+  function openModal(conference) {
+    setSelectedConference(conference);
+  }
+
   return (
     <div className="col">
       {props.list.map(data => {
         const conference = data.conference;
+        const weather = data.weather;
         return (
           <div key={conference.href} className="card mb-3 shadow">
             <img src={conference.location.picture_url} className="card-img-top" />
@@ -17,16 +24,66 @@ function ConferenceColumn(props) {
               <p className="card-text">
                 {conference.description}
               </p>
+              <button className="btn btn-primary" onClick={() => openModal(conference)}>View details</button>
             </div>
             <div className="card-footer">
               {new Date(conference.starts).toLocaleDateString()}
               -
               {new Date(conference.ends).toLocaleDateString()}
             </div>
+            {selectedConference && <ConferenceModal conference={selectedConference} weather={weather} setIsOpen={setSelectedConference} />}
           </div>
         );
       })}
     </div>
+  );
+}
+
+function ConferenceModal(props) {
+  const [isOpen, setIsOpen] = useState(false);
+  const conference = props.conference;
+  const modalId = `modal-${conference.href}`;
+
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
+
+  function toggleModal() {
+    setIsOpen(!isOpen);
+    props.setIsOpen(null);
+  }
+
+  const weather = props.weather;
+
+  return (
+    <>
+      {isOpen && (
+        <div className="modal" style={{ display: 'block' }}>
+          <div className="modal-dialog" role="dialog" aria-labelled by={modalId}>
+            <div className="modal-content">
+              <div className="modal-header">
+              <h5 className="modal-title" id={modalId}>{conference.name}</h5>
+                <button type="button" className="btn-close" onClick={toggleModal}></button>
+              </div>
+              <div className="modal-body">
+                <p>Conference Description: {conference.description}</p>
+                <p>Location: {conference.location.name}</p>
+                <p>Dates: {new Date(conference.starts).toLocaleDateString()} - {new Date(conference.ends).toLocaleDateString()}</p>
+                <p>Max attendees: {conference.max_attendees}</p>
+                <p>Max presentations: {conference.max_presentations}</p>
+                <p>The weather: {weather.description}</p>
+                <p>The temperature: {weather.temp} degrees</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={toggleModal}>
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
@@ -44,28 +101,18 @@ class MainPage extends React.Component {
     try {
       const response = await fetch(url);
       if (response.ok) {
-        // Get the list of conferences
         const data = await response.json();
 
-        // Create a list of for all the requests and
-        // add all of the requests to it
         const requests = [];
         for (let conference of data.conferences) {
           const detailUrl = `http://localhost:8000${conference.href}`;
           requests.push(fetch(detailUrl));
         }
 
-        // Wait for all of the requests to finish
-        // simultaneously
         const responses = await Promise.all(requests);
 
-        // Set up the "columns" to put the conference
-        // information into
         const conferenceColumns = [[], [], []];
 
-        // Loop over the conference detail responses and add
-        // each to to the proper "column" if the response is
-        // ok
         let i = 0;
         for (const conferenceResponse of responses) {
           if (conferenceResponse.ok) {
@@ -80,8 +127,6 @@ class MainPage extends React.Component {
           }
         }
 
-        // Set the state to the new list of three lists of
-        // conferences
         this.setState({conferenceColumns: conferenceColumns});
       }
     } catch (e) {
