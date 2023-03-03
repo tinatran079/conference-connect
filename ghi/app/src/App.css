@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap');
+
+:root {
+  --primary-color: #2DAD97;
+  --secondary-color: #510910;
+  --tertiary-color: #f3ebed;
+}
+
+body {
+  background-color: white;
+  color: var(--secondary-color);
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar-nav .nav-link {
+  color: #510910;
+  font-size: 18px;
+  font-weight: 30px;
+}
+
+.navbar-brand {
+  color: #510910;
+  font-size: 25px;
+}
+
+.navbar-brand:hover {
+  color: #510910;
+}
+
+.navbar-nav {
+  margin-left: auto;
+  padding-right: 1rem;
+}
+
+.navbar {
+  padding: 20px;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+a {
+  color: var(--primary-color);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: #1b7f6e;
+  border-color: #1b7f6e;
+}
+
+.card {
+  background-color: #F4EBED;
+  border: none;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+.card-subtitle {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.card-text {
+  color: var(--secondary-color);
+}
+
+.card-footer {
+  background-color: rgb(245, 238, 238);
+}
+
+.modal-content {
+  border: 2px solid var(--secondary-color);
+  border-radius: 7px;
+}
+
+.modal-header {
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+}
+
+.modal-title {
+  color: var(--tertiary-color);
+}
+
+.modal-body {
+  color: var(--secondary-color);
+}
+
+.modal-footer {
+  background-color: var(--tertiary-color);
+  border-top: none;
+}
+
+.main-page h1 {
+  font-weight: 900;
+}
+
+.main-page .header {
+  background-image: url('./images/backgroundimg.png');
+  background-size: cover;
+  background-position: center center;
+  padding: 100px 0;
+  margin-bottom: 20px;
+}
+.main-page h5 {
+  font-weight: 700;
+}
+
+.location-form {
+  background-color: var(--tertiary-color);
+}
+
+.conference-form {
+  background-color: var(--tertiary-color);
+}
+
+.presentation-form {
+  background-color: var(--tertiary-color);
+}

@@ -120,7 +120,7 @@ class ConferenceForm extends React.Component {
         <div className="container">
         <div className="row">
           <div className="offset-3 col-6">
-            <div className="shadow p-4 mt-4">
+            <div className="shadow p-4 mt-4 conference-form">
               <h1>Create a new conference</h1>
               <form onSubmit={this.handleSubmit} id="create-conference-form">
                 <div className="form-floating mb-3">

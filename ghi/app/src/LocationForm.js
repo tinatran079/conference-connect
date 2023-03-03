@@ -81,7 +81,7 @@ class LocationForm extends React.Component {
     return (
       <div className="row">
         <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
+          <div className="shadow p-4 mt-4 location-form">
             <h1>Create a new location</h1>
             <form onSubmit={this.handleSubmit} id="create-location-form">
               <div className="form-floating mb-3">

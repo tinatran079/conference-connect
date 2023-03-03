@@ -50,7 +50,7 @@ function ConferenceModal(props) {
 
   function toggleModal() {
     setIsOpen(!isOpen);
-    props.setIsOpen(null);
+    props.setIsOpen(undefined);
   }
 
   const weather = props.weather;
@@ -75,7 +75,7 @@ function ConferenceModal(props) {
                 <p>The temperature: {weather.temp} degrees</p>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={toggleModal}>
+                <button type="button" className="btn btn-primary" onClick={toggleModal}>
                   Close
                 </button>
               </div>
@@ -136,20 +136,16 @@ class MainPage extends React.Component {
 
   render() {
     return (
-      <>
-        <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
-          <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
-          <h1 className="display-5 fw-bold">Conference GO!</h1>
-          <div className="col-lg-6 mx-auto">
-            <p className="lead mb-4">
-              The only resource you'll ever need to plan an run your in-person or
-              virtual conference for thousands of attendees and presenters.
-            </p>
-            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/attendees/new" className="btn btn-primary btn-lg px-4 gap-3">Attend a conference</Link>
-            </div>
-          </div>
+      <div className="main-page">
+      <div className="header">
+      <div className="px-4 py-5 my-5 mt-0 text-center">
+        <h1 className="display-5">Welcome to Conference GO!</h1>
+        <h5 className="lead mb-4">The only resource you'll ever need to plan and run your in-person or virtual conference.</h5>
+        <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <Link to="/attendees/new" className="btn btn-primary btn-lg px-4 gap-3">Attend a conference</Link>
         </div>
+      </div>
+      </div>
         <div className="container">
           <h2>Upcoming conferences</h2>
           <div className="row">
@@ -160,7 +156,7 @@ class MainPage extends React.Component {
             })}
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
