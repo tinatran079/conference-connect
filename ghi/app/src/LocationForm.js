@@ -79,6 +79,7 @@ class LocationForm extends React.Component {
   }
   render() {
     return (
+      <div className="location-form-container">
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4 location-form">
@@ -112,6 +113,8 @@ class LocationForm extends React.Component {
             </form>
           </div>
         </div>
+      </div>
+      <div className="bottom-image-container"></div>
       </div>
     );
   }

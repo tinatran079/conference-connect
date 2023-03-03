@@ -164,6 +164,7 @@ class ConferenceForm extends React.Component {
             </div>
           </div>
         </div>
+        <div className="bottom-image-container"></div>
       </div>
     );
   }

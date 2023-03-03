@@ -139,6 +139,7 @@ class PresentationForm extends React.Component {
                         </form>
                     </div>
                 </div>
+                <div className="bottom-image-container"></div>
             </div>
         );
     }
