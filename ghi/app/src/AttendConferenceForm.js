@@ -29,7 +29,7 @@ class AttendConferenceForm extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    const data = {...this.state};
+    const data = { ...this.state };
     delete data.conferences;
     delete data.hasSignedUp;
 
@@ -86,7 +86,7 @@ class AttendConferenceForm extends React.Component {
       <div className="my-5 container">
         <div className="row">
           <div className="col col-sm-auto">
-          <img width="300" className="bg-white rounded d-block mx-auto mb-4" src={attend}/>
+            <img width="300" className="bg-white rounded d-block mx-auto mb-4" src={attend} />
           </div>
           <div className="col">
             <div className="card shadow">

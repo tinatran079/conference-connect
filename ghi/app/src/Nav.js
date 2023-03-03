@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
-function Nav(){
-    return (
+function Nav() {
+  return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">ConferenceConnect</a>
@@ -11,10 +11,10 @@ function Nav(){
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
             <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/locations/new">New location</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="/locations/new">New location</NavLink>
             </li>
             <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/conferences/new">New conference</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="/conferences/new">New conference</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" to="/presentations/new">New presentation</NavLink>
@@ -27,6 +27,6 @@ function Nav(){
       </div>
     </nav>
 
-    );
+  );
 }
 export default Nav;
