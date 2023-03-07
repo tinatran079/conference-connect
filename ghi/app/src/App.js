@@ -1,14 +1,13 @@
-import React from 'react';
-import Nav from './Nav';
-import AttendeesList from './AttendeesList';
-import LocationForm from './LocationForm';
-import ConferenceForm from './ConferenceForm';
-import AttendConferenceForm from './AttendConferenceForm';
-import PresentationForm from './PresentationForm';
-import MainPage from './MainPage';
-import './App.css';
+import React from "react";
+import Nav from "./Nav";
+import AttendeesList from "./AttendeesList";
+import LocationForm from "./LocationForm";
+import ConferenceForm from "./ConferenceForm";
+import AttendConferenceForm from "./AttendConferenceForm";
+import PresentationForm from "./PresentationForm";
+import MainPage from "./MainPage";
+import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 
 function App(props) {
   if (props.attendees === undefined) {
@@ -18,7 +17,7 @@ function App(props) {
     <BrowserRouter>
       <Nav />
       <Routes>
-      <Route index element={<MainPage />} />
+        <Route index element={<MainPage />} />
         <Route path="locations">
           <Route path="new" element={<LocationForm />} />
         </Route>

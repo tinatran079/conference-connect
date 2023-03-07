@@ -8,7 +8,7 @@ function AttendeesList(props) {
         </tr>
       </thead>
       <tbody>
-        {props.attendees.map(attendee => {
+        {props.attendees.map((attendee) => {
           return (
             <tr key={attendee.href}>
               <td>{attendee.name}</td>
