@@ -168,7 +168,7 @@ class MainPage extends React.Component {
       <div className="main-page">
         <div className="header">
           <div className="px-4 py-5 my-5 mt-0 text-center">
-            <h1 className="display-5">Welcome to Conference GO!</h1>
+            <h1 className="display-5">Welcome to ConferenceConnect!</h1>
             <h5 className="lead mb-4">
               The only resource you'll ever need to plan and run your in-person
               or virtual conference.
